@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Wildland Fire Map (NASA/FIRMS)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/static/style.css" />
+
+  <!-- Plotly (charts) -->
+  <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+  <!-- Leaflet JS -->
+  <script
+    defer
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <!-- App JS -->
+  <script defer src="/static/app.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Wildland Fire Map (NASA/FIRMS)</h1>
+
+    <div class="controls" id="toolbar">
+      <!-- Days Selector -->
+      <label>Days:
+        <select id="days">
+          <option value="1">Last 24h</option>
+          <option value="2">48h</option>
+          <option value="7" selected>7 days</option>
+          <option value="14">14 days</option>
+        </select>
+      </label>
+
+      <!-- Source Selector -->
+      <label>Source:
+        <select id="source">
+          <option value="viirs" selected>VIIRS</option>
+          <option value="modis">MODIS</option>
+        </select>
+      </label>
+
+      <!-- Confidence Selector -->
+      <label>Min confidence:
+        <select id="min_conf">
+          <option value="l">Low</option>
+          <option value="n" selected>Nominal</option>
+          <option value="h">High</option>
+        </select>
+      </label>
+
+      <!-- Action Buttons -->
+      <button id="btnLoad">Load fires in view</button>
+      <button id="btnAnalyze">Analyze in view</button>
+      <button id="btnCountry">By country</button>
+      <button id="btnSelectArea">Select area</button>
+      <button id="btnMeasure">Measure distance</button>
+      <button id="btnClear">Clear</button>
+
+      <!-- NEW Convex Hull Toggle -->
+      <label style="margin-left: 10px;">
+        <input type="checkbox" id="chkHull" />
+        Show convex hull
+      </label>
+
+      <!-- Status -->
+      <span id="status" class="status"></span>
+    </div>
+  </header>
+
+  <!-- Map -->
+  <div id="map"></div>
+
+  <!-- Chart -->
+  <div id="chart"></div>
+
+  <footer>
+    Data: NASA/LANCE/FIRMS (MODIS &amp; VIIRS). Map © OpenStreetMap contributors.
+  </footer>
+</body>
+</html>
